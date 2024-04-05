@@ -31,25 +31,34 @@ public class Server {
     private static void handleRequest(Socket clientSocket) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
              OutputStream outputStream = clientSocket.getOutputStream()) {
+            RequestHandler requestHandler = new RequestHandler();
 
             // Read the HTTP request
             String line;
             int count = 0;
             while ((line = reader.readLine()) != null && !line.isEmpty()) {
                 count++;
+                System.out.println(line);
                 if (count == 1) {
-                    System.out.println(line);
-                    System.out.println(CheckRequest.checkLine(count, line));
-                }
+                    if (!requestHandler.checkRequest(line)) {
+                        ServerResponse.getBadRequest(outputStream);
+                        clientSocket.close();
+                        return;
+                    }
+                } else requestHandler.parseHeaders(line);
             }
 
-            // Respond with a simple HTTP response
-            String response = "HTTP/1.1 200 OK\r\n"
-                    + "\r\n";
-            outputStream.write(response.getBytes());
+            if (!requestHandler.checkHeaders()) {
+                ServerResponse.getBadRequest(outputStream);
+                clientSocket.close();
+                return;
+            }
 
-            // Close the client socket
+            requestHandler.parseBody(reader);
+
+            ServerResponse.getOK(outputStream);
             clientSocket.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
