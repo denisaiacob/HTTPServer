@@ -93,7 +93,7 @@ public class RequestHandler {
     }
 
     public String getBodyLength() {
-        return headers.getOrDefault("Content-Length", null);
+        return headers.getOrDefault("Content-Length", "0");
     }
 
     private void setBody(String body) {
