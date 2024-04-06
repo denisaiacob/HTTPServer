@@ -6,13 +6,24 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
-public class Server {
-    public static void main(String[] args) {
-        final int PORT = 5000;
+class Server {
 
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("Server started. Listening on port " + PORT);
+    private int port;
+    private HashMap<String, String> paths =new HashMap<>();
+
+    protected void setPort(int port) {
+        this.port = port;
+    }
+
+    protected void addPath(String path, String method) {
+        paths.put(path, method);
+    }
+
+    protected void run() {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server started. Listening on port " + port);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
@@ -21,14 +32,13 @@ public class Server {
                 // Handle client request in a new thread
                 Thread clientHandler = new Thread(() -> handleRequest(clientSocket));
                 clientHandler.start();
-
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void handleRequest(Socket clientSocket) {
+    private void handleRequest(Socket clientSocket) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
              OutputStream outputStream = clientSocket.getOutputStream()) {
             RequestHandler requestHandler = new RequestHandler();
@@ -40,7 +50,7 @@ public class Server {
                 count++;
                 System.out.println(line);
                 if (count == 1) {
-                    if (!requestHandler.checkRequest(line)) {
+                    if (!requestHandler.checkRequest(line, paths)) {
                         ServerResponse.getBadRequest(outputStream);
                         clientSocket.close();
                         return;
@@ -63,5 +73,4 @@ public class Server {
             e.printStackTrace();
         }
     }
-
 }

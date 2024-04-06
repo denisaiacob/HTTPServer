@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
-public class RequestHandler {
+class RequestHandler {
     private String method;
     private String pathToResource;
     private String httpVersion;
@@ -14,7 +15,7 @@ public class RequestHandler {
     private HashMap<String, String> headers = new HashMap<>();
     private String textBody;
 
-    public boolean checkRequest(String lineContent) {
+    public boolean checkRequest(String lineContent, HashMap<String, String> paths) {
         List<String> methods = List.of("GET", "POST", "PUT", "DELETE");
         String[] splitContent = lineContent.split(" ");
         if (splitContent.length > 3)
@@ -27,7 +28,13 @@ public class RequestHandler {
             return false;
 
         setRequest(splitContent);
-        return true;
+        return checkPathList(paths);
+    }
+
+    private boolean checkPathList(HashMap<String, String> pathsList) {
+        if (!pathsList.containsKey(pathToResource))
+            return false;
+        return Objects.equals(method, pathsList.get(pathToResource));
     }
 
     private void setRequest(String[] splitContent) {
@@ -36,7 +43,7 @@ public class RequestHandler {
         this.httpVersion = splitContent[2];
     }
 
-    private boolean checkPathToResource(String path) {
+    public static boolean checkPathToResource(String path) {
         if (path.length() == 1 && path.contains("/")) {
             return true;
         }
