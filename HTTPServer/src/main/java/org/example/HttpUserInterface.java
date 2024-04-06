@@ -15,23 +15,23 @@ public class HttpUserInterface extends Server {
         }
     }
 
-    public void addGetPath(String path) {
+    public void addGetPath(String path, RequestHandlerFunction function) {
         checkPath(path);
-        addPath(path, "GET");
+        addPath(path, new RequestAllowed("GET", path, function));
     }
 
-    public void addPostPath(String path) {
+    public void addPostPath(String path, RequestHandlerFunction function) {
         checkPath(path);
-        addPath(path, "POST");
+        addPath(path, new RequestAllowed("POST", path, function));
     }
 
-    public void addPutPath(String path) {
+    public void addPutPath(String path, RequestHandlerFunction function) {
         checkPath(path);
-        addPath(path, "PUT");
+        addPath(path, new RequestAllowed("PUT", path, function));
     }
 
-    public void addDeletePath(String path) {
+    public void addDeletePath(String path, RequestHandlerFunction function) {
         checkPath(path);
-        addPath(path, "DELETE");
+        addPath(path, new RequestAllowed("DELETE", path, function));
     }
 }

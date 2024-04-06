@@ -11,14 +11,14 @@ import java.util.HashMap;
 class Server {
 
     private int port;
-    private HashMap<String, String> paths =new HashMap<>();
+    private HashMap<String, RequestAllowed> paths =new HashMap<>();
 
     protected void setPort(int port) {
         this.port = port;
     }
 
-    protected void addPath(String path, String method) {
-        paths.put(path, method);
+    protected void addPath(String path, RequestAllowed requestAllowed) {
+        paths.put(path,requestAllowed);
     }
 
     protected void run() {

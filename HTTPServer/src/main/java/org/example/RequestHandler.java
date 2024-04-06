@@ -15,7 +15,7 @@ class RequestHandler {
     private HashMap<String, String> headers = new HashMap<>();
     private String textBody;
 
-    public boolean checkRequest(String lineContent, HashMap<String, String> paths) {
+    public boolean checkRequest(String lineContent, HashMap<String, RequestAllowed> paths) {
         List<String> methods = List.of("GET", "POST", "PUT", "DELETE");
         String[] splitContent = lineContent.split(" ");
         if (splitContent.length > 3)
@@ -31,10 +31,10 @@ class RequestHandler {
         return checkPathList(paths);
     }
 
-    private boolean checkPathList(HashMap<String, String> pathsList) {
+    private boolean checkPathList(HashMap<String, RequestAllowed> pathsList) {
         if (!pathsList.containsKey(pathToResource))
             return false;
-        return Objects.equals(method, pathsList.get(pathToResource));
+        return Objects.equals(method, pathsList.get(pathToResource).getMethod());
     }
 
     private void setRequest(String[] splitContent) {
