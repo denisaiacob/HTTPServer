@@ -1,6 +1,9 @@
 package org.example;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 @FunctionalInterface
 public interface RequestHandlerFunction {
-    void handleFunction();
+    String handleFunction(String body) throws IOException;
 }

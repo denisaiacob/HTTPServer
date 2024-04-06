@@ -11,9 +11,8 @@ class RequestHandler {
     private String method;
     private String pathToResource;
     private String httpVersion;
-
-    private HashMap<String, String> headers = new HashMap<>();
     private String textBody;
+    private HashMap<String, String> headers = new HashMap<>();
 
     public boolean checkRequest(String lineContent, HashMap<String, RequestAllowed> paths) {
         List<String> methods = List.of("GET", "POST", "PUT", "DELETE");
@@ -113,7 +112,14 @@ class RequestHandler {
             char[] buf = new char[bodyLength];
             reader.read(buf, 0, bodyLength);
             setBody(String.valueOf(buf));
-            System.out.println(textBody);
         }
+    }
+
+    public String getPathToResource() {
+        return pathToResource;
+    }
+
+    public String getTextBody() {
+        return textBody;
     }
 }

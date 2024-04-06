@@ -13,12 +13,11 @@ public class ServerResponse {
         outputStream.write(response.getBytes());
     }
 
-    public static void getOK(OutputStream outputStream) throws IOException {
-        String response = """
-                HTTP/1.1 200 OK\r
-                \r
-                Am trimis datele\r
-                """;
+    public static void getOK(OutputStream outputStream, String responseBody) throws IOException {
+        String response = "HTTP/1.1 200 OK\r\n"
+                + "\r\n"
+                + responseBody
+                + "\r\n";
         outputStream.write(response.getBytes());
     }
 }

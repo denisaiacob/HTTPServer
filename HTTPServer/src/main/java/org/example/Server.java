@@ -11,14 +11,14 @@ import java.util.HashMap;
 class Server {
 
     private int port;
-    private HashMap<String, RequestAllowed> paths =new HashMap<>();
+    private HashMap<String, RequestAllowed> paths = new HashMap<>();
 
     protected void setPort(int port) {
         this.port = port;
     }
 
     protected void addPath(String path, RequestAllowed requestAllowed) {
-        paths.put(path,requestAllowed);
+        paths.put(path, requestAllowed);
     }
 
     protected void run() {
@@ -48,7 +48,6 @@ class Server {
             int count = 0;
             while ((line = reader.readLine()) != null && !line.isEmpty()) {
                 count++;
-                System.out.println(line);
                 if (count == 1) {
                     if (!requestHandler.checkRequest(line, paths)) {
                         ServerResponse.getBadRequest(outputStream);
@@ -66,7 +65,11 @@ class Server {
 
             requestHandler.parseBody(reader);
 
-            ServerResponse.getOK(outputStream);
+            String responseBody = paths.get(requestHandler.getPathToResource())
+                    .getFunction()
+                    .handleFunction(requestHandler.getTextBody());
+
+            ServerResponse.getOK(outputStream,responseBody);
             clientSocket.close();
 
         } catch (IOException e) {

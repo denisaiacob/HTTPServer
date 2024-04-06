@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56d31023-f7f3-4d99-9680-8f65979a1c1c" name="Changes" comment="user interface">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/RequestAllowed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/RequestHandlerFunction.java" afterDir="false" />
+    <list default="true" id="56d31023-f7f3-4d99-9680-8f65979a1c1c" name="Changes" comment="user: add requests allowed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HttpUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HttpUserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RequestHandlerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RequestHandlerFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ServerResponse.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,12 +89,21 @@
       <option name="project" value="LOCAL" />
       <updated>1712390034974</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="user: add requests allowed">
+      <option name="closed" value="true" />
+      <created>1712395586742</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712395586742</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="body length 0" />
     <MESSAGE value="user interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="user interface" />
+    <MESSAGE value="user: add requests allowed" />
+    <option name="LAST_COMMIT_MESSAGE" value="user: add requests allowed" />
   </component>
 </project>
